@@ -14,3 +14,7 @@ conn.sync({ force: true }).then(() => {
   })
   server.on('error', error => loggerError.error(`Error en servidor ${error}`))
 })
+
+// conn.sync({force:true}).then(()=>{
+//     server.listen(3001, ()=>{console.log('listening')})
+// })

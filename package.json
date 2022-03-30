@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Lean65/deviaje.com-api#readme",
   "dependencies": {
+    "axios": "^0.26.1",
     "body-parser": "^1.19.2",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",

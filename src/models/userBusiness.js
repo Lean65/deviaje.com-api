@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = sequelize => {
-    sequelize.define('user-beta', {
+    sequelize.define('user-business', {
         mail: {
             type: DataTypes.STRING
         },
@@ -10,9 +10,6 @@ module.exports = sequelize => {
         },
         userName: {
             type: DataTypes.STRING
-        },
-        favs: {
-            type: DataTypes.ARRAY(DataTypes.STRING)
-        },
+        }
     })
 }

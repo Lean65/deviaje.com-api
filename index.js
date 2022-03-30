@@ -13,6 +13,7 @@ conn.sync({ force: true }).then(() => {
     loggerConsola.info(`Server is run on port ${PORT}`, server.settings.env)
   })
   server.on('error', error => loggerError.error(`Error en servidor ${error}`))
+})
 
 // conn.sync({force:true}).then(()=>{
 //     server.listen(3001, ()=>{console.log('listening')})

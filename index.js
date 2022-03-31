@@ -19,4 +19,3 @@ conn.sync({ force: true }).then(() => {
 // conn.sync({force:true}).then(()=>{
 //     server.listen(3001, ()=>{console.log('listening')})
 // })
-

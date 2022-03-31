@@ -1,0 +1,79 @@
+const axios = require('axios')
+const { Router } = require('express')
+const router = Router()
+const BASE = 'https://tequila-api.kiwi.com'
+
+//functions
+const FindLocationValue = (name, value) => {
+    const KEY = 'lOcmY9Q0RrcW078bg5nzA-nMzQUEbrHB'
+    return axios.get(`${BASE}/locations/query?term=${name}`, {headers: {
+        apikey: KEY
+    }})
+    .then(r=>r.data.locations.filter(e=>e.type==='city')[0][value])
+    .catch(e=>e)
+    // .then(a=>a)
+}
+const ParseData = obj => Object.entries(obj).map(e=>e.join('=')).join('&')
+
+
+// https://tequila-api.kiwi.com/locations/anything?key=name&value=mar%20del%20plata&locale=en-US&active_only=true
+router.get('/', (req, res)=>{
+    res.status(200).send('Todo ok')
+})
+
+router.get('/getflights', (req, res)=>{
+    Promise.all([FindLocationValue(req.body.fly_from, 'code'), FindLocationValue(req.body.fly_to, 'code')])
+    .then(resp => {
+        req.body.fly_from = resp[0]
+        req.body.fly_to = resp[1]
+        return req.body
+    })
+    .then(() => axios.get(`${BASE}/v2/search?${ParseData(req.body)}`, {headers: {
+        apikey: 'lOcmY9Q0RrcW078bg5nzA-nMzQUEbrHB'
+    }}))
+    .then(resp => res.status(200).send(resp.data))
+    .catch(e => res.send(e))
+})
+
+//Despues cambiar a promesa
+router.get('/getonefly', async (req, res)=>{
+    const {from, to, dateFrom, dateTo, id} = req.query
+    const URL = 'https://tequila-api.kiwi.com/v2/search'
+    const cityCode = await FindLocationValue(from, 'code')
+    const cityCode2 = await FindLocationValue(to, 'code')
+    try {
+        const alter = await axios.get(`${URL}?fly_from=${cityCode}&fly_to=${cityCode2}&dateFrom=${dateFrom}&dateTo=${dateTo}`, {headers: {
+            apikey: 'lOcmY9Q0RrcW078bg5nzA-nMzQUEbrHB'
+        }})
+        // console.log(Object.keys(alter.data))
+        res.send(alter.data.data.filter(e=>e.id===id || '077600534a8c0000f7a7be65_0|077600534a8c0000f7a7be65_1|0053209f4a8c00007631352e_0|0053209f4a8c00007631352e_1')[0])
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+//Se puede usar para buscar localizaciones pasando el nombre de una ciudad como "term", alternativamente un type que se
+//usaria para filtrar resultados
+router.get('/getcityinfo', (req, res)=>{
+    const {search, type} = req.query
+    axios.get(`${BASE}/locations/query?term=${search || 'london_gb'}`, {headers: {
+        apikey: 'n_-RwJB-98J-s0_OyVx1n9tFSd5SPtoI'
+    }})
+    // .then(resp => resp.data.locations.filter(e=>e.type === type)).then(resp => res.status(200).send(resp))
+    .then(resp => resp.data.locations).then(resp => res.status(200).send(resp))
+    .catch(error => res.status(404).send(error))
+})
+
+router.get('/topdestinationscity', (req, res)=>{
+    const {city} = req.query         //Para cuando se reciba el termino por query
+    // const ID = 
+    FindLocationValue(city, 'id').then(id => {
+        axios.get(`${BASE}/locations/topdestinations?term=${id}`, {headers: {
+            apikey: 'n_-RwJB-98J-s0_OyVx1n9tFSd5SPtoI'
+        }})
+        .then(resp => res.status(200).send(resp.data.locations))
+        .catch(error => res.status(404).send(error))
+    })
+})
+
+module.exports = router

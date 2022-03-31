@@ -4,7 +4,7 @@ const axios = require('axios')
 const { FindLocationValue, ParseData } = require('../utils/routes')
 const BASE = 'https://tequila-api.kiwi.com'
 
-
+//La cree solo para una prueba con el front
 router.post('/getflightspost', (req, res)=>{
     Promise.all([FindLocationValue(req.body.fly_from, 'code'), FindLocationValue(req.body.fly_to, 'code')])
     .then(resp => {

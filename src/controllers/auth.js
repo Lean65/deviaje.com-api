@@ -1,7 +1,7 @@
 const { tokenSign } = require('../utils/handleJwt')
 const { matchedData } = require('express-validator')
 const { usersModel } = require('../models')
-const { encrypt, compare } = require('../utils/handlePassword')
+//const { encrypt, compare } = require('../utils/handlePassword')
 const { handleHttpError } = require('../utils/handleError')
 
 const registerCtrl = async (req, res) => {

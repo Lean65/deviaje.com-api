@@ -1,12 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const axios = require('axios')
-const { FindLocationValue, ParseData } = require('../utils/routes')
+const { FindLocationValue, ParseData, DecodeQuery } = require('../utils/routes')
 const BASE = 'https://tequila-api.kiwi.com'
 
 //La cree solo para una prueba con el front
-router.post('/getflightspost', (req, res)=>{
-    Promise.all([FindLocationValue(req.body.fly_from, 'code'), FindLocationValue(req.body.fly_to, 'code')])
+router.get('/getflightspost', (req, res)=>{
+    const obj = DecodeQuery(req.query)
+    Promise.all([FindLocationValue(obj.fly_from, 'code'), FindLocationValue(obj.fly_to, 'code')])
     .then(resp => {
         req.body.fly_from = resp[0]
         req.body.fly_to = resp[1]

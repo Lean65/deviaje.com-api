@@ -1,5 +1,6 @@
 const axios = require('axios')
 const BASE = 'https://tequila-api.kiwi.com'
+const KEY = 'n_-RwJB-98J-s0_OyVx1n9tFSd5SPtoI'
 
 const FindLocationValue = (name, value) => {
     const KEY = 'lOcmY9Q0RrcW078bg5nzA-nMzQUEbrHB'

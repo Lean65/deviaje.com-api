@@ -8,7 +8,6 @@ const axios = require('axios')
 router.get('/topdestination', (req, res)=>{
     const {city} = req.query         //Para cuando se reciba el termino por query
     // const ID = 
-    console.log('holis')
     FindLocationValue(city, 'id').then(id => {
         axios.get(`${BASE}/locations/topdestinations?term=${id}`, {headers: {
             apikey: 'n_-RwJB-98J-s0_OyVx1n9tFSd5SPtoI'

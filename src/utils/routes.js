@@ -11,7 +11,7 @@ const FindLocationValue = (name, value) => {
     .catch(e=>e)
     // .then(a=>a)
 }
-const DecodeQuery = str => Object.fromEntries(string.split('&').map(e=>e.split('=')))
+const DecodeQuery = str => Object.fromEntries(str.split('&').map(e=>e.split('=')))
 const ParseData = obj => Object.entries(obj).map(e=>e.join('=')).join('&')
 
 module.exports = {

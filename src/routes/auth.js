@@ -8,4 +8,8 @@ router.post('/register', validatorRegister, registerCtrl)
 
 router.post('/login', validatorLogin, loginCtrl)
 
+// router.get('/', (req, res) => {
+//   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
+// })
+
 module.exports = router

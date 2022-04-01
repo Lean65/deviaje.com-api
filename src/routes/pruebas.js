@@ -1,14 +1,50 @@
 const axios = require('axios')
 const { Router } = require('express')
-// const { UsuarioBeta } = require('../db')
-// require('dotenv').config()
+require('dotenv').config()
 // const { API_KEY } = process.env;
 const router = Router()
 const BASE = 'https://tequila-api.kiwi.com'
+const { handleHttpError } = require('../utils/handleError')
 
 // https://tequila-api.kiwi.com/locations/anything?key=name&value=mar%20del%20plata&locale=en-US&active_only=true
 router.get('/', (req, res) => {
   res.status(200).send('Todo ok')
+})
+
+router.post('/pruebaFrondEnd', async (req, res) => {
+  try {
+    // const {
+    //   email,
+    //   email_verified,
+    //   family_name,
+    //   given_name,
+    //   locale,
+    //   name,
+    //   nickname,
+    //   picture,
+    //   sub,
+    //   updated_at
+    // } = await req.body
+    const { user } = await req.body
+    // const data = {
+    //   email,
+    //   email_verified,
+    //   family_name,
+    //   given_name,
+    //   locale,
+    //   name,
+    //   nickname,
+    //   picture,
+    //   sub,
+    //   updated_at
+    // }
+    console.log(user)
+    console.log('post ok otra vez')
+    res.status(200).send({ message: 'todo ok' })
+  } catch (err) {
+    console.log(err)
+    handleHttpError(res, 'ERROR_LOGIN')
+  }
 })
 
 //Solo la use para crear la funcion FindCode

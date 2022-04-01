@@ -1,7 +1,8 @@
 const models = {
+  usersModel: require('./userAdmin'),
+  clientsModel: require('./userClient'),
+  businessModel: require('./userBusiness'),
   usersModel: require('./users')
-  //clientsModel: require('./clients')
-  //storageModel: require('./')
 }
 
 module.exports = models

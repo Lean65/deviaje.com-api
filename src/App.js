@@ -4,6 +4,16 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 //const routes = require('./routes/index.js')
+//const { auth } = require('express-openid-connect')
+
+// const config = {
+//   authRequired: false,
+//   auth0Logout: true,
+//   secret: process.env.SECRET,
+//   baseURL: process.env.BASE_URL,
+//   clientID: process.env.CLIENT_ID,
+//   issuerBaseURL: process.env.ISSUER_BASE_URL
+// }
 
 require('./db.js')
 
@@ -25,6 +35,8 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
   next()
 })
+
+//server.use(auth(config))
 
 server.use('/api', require('./routes'))
 

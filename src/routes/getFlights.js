@@ -5,7 +5,7 @@ const { FindLocationValue, ParseData } = require('../utils/routes')
 const BASE = 'https://tequila-api.kiwi.com'
 
 
-router.get('/getflights', (req, res)=>{
+const func = (req, res)=>{
     Promise.all([FindLocationValue(req.query.fly_from, 'code'), FindLocationValue(req.query.fly_to, 'code')])
     .then(resp => {
         req.query.fly_from = resp[0]
@@ -16,8 +16,11 @@ router.get('/getflights', (req, res)=>{
             apikey: 'lOcmY9Q0RrcW078bg5nzA-nMzQUEbrHB'
         }})
     )
-    .then(resp => res.status(200).send(resp.data))
+    .then(resp => resp.data.data.length > 0 ? res.status(200).send(resp.data) :
+        res.status(400).send('No se encontraron vuelos para la busqueda actual'))
     .catch(e => res.send(e))
-})
+}
+
+router.get('/getflights', func)
 
 module.exports = router

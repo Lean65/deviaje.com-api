@@ -6,6 +6,9 @@ const BASE = 'https://tequila-api.kiwi.com'
 
 
 router.get('/getonefly', (req, res)=>{
+    //Va a NECESITAR recibir el ID por query
+    //NO SEARCH ID
+    console.table(req.query)
     Promise.all([FindLocationValue(req.query.fly_from, 'code'), FindLocationValue(req.query.fly_to, 'code')])
     .then(resp => {
         req.query.fly_from = resp[0]
@@ -16,7 +19,10 @@ router.get('/getonefly', (req, res)=>{
             apikey: 'lOcmY9Q0RrcW078bg5nzA-nMzQUEbrHB'
         }})
     )
-    .then(resp => res.status(200).send(resp.data.data[0]))
+    .then(resp => {
+        let resultado = resp.data.data.filter(e=>e.id === req.query.id)
+        resultado.length > 0 ? res.status(200).send(resultado) : res.status(400).send('No se encontraron vuelos para la busqueda actual')
+    })
     .catch(e => res.send(e))
 })
 

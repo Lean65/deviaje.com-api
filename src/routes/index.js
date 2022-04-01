@@ -10,6 +10,9 @@ const removeExtension = filename => {
 }
 
 fs.readdirSync(PATH_ROUTES).filter(file => {
+  router.get('/', (req, res)=>{
+    res.send('estas en main')
+  })
   const name = removeExtension(file)
 
   if (name != 'index') {

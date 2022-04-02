@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
   //port        5432                                                                /
   //database    de2lirvfeel98j
   // process.env.DATABASE_URL ||
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/fly`,
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:80/fly`,
   {
     logging: false,
     native: false

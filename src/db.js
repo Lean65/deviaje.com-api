@@ -6,7 +6,19 @@ const { PassThrough } = require('stream')
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env
 
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`,
+  // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`,
+  //'postgres://user:pass@example.com:5432/dbname'
+  //Reemplazar el db al final por el nombre de la base de datos
+  //const sequelize = new Sequelize(
+  //postgres://user:pass@example.com:5432/dbname
+  //tipo y user postgres://nmsjqlanayhjza:
+  //password    38f8e70b764138a2844437a450675d8054f0dfc7ff583e528e07586364c3f237    @
+  //host        ec2-52-18-116-67.eu-west-1.compute.amazonaws.com                    :
+  //port        5432                                                                /
+  //database    de2lirvfeel98j
+  // process.env.DATABASE_URL ||
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:80/fly`,
+
   {
     logging: false, // set to console.log to see the raw SQL queries
     native: false // lets Sequelize know we can use pg-native for ~30% more speed

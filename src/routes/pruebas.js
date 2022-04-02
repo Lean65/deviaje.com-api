@@ -11,42 +11,6 @@ router.get('/', (req, res) => {
   res.status(200).send('Todo ok')
 })
 
-router.post('/pruebaFrondEnd', async (req, res) => {
-  try {
-    // const {
-    //   email,
-    //   email_verified,
-    //   family_name,
-    //   given_name,
-    //   locale,
-    //   name,
-    //   nickname,
-    //   picture,
-    //   sub,
-    //   updated_at
-    // } = await req.body
-    const { user } = await req.body
-    // const data = {
-    //   email,
-    //   email_verified,
-    //   family_name,
-    //   given_name,
-    //   locale,
-    //   name,
-    //   nickname,
-    //   picture,
-    //   sub,
-    //   updated_at
-    // }
-    console.log(user)
-    console.log('post ok otra vez')
-    res.status(200).send({ message: 'todo ok' })
-  } catch (err) {
-    console.log(err)
-    handleHttpError(res, 'ERROR_LOGIN')
-  }
-})
-
 //Solo la use para crear la funcion FindCode
 router.get('/findcode', (req, res) => {
   const KEY = 'lOcmY9Q0RrcW078bg5nzA-nMzQUEbrHB'

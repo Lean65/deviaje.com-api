@@ -12,7 +12,7 @@ const sequelize = new Sequelize(
   //host        ec2-52-18-116-67.eu-west-1.compute.amazonaws.com                    :
   //port        5432                                                                /
   //database    de2lirvfeel98j
-  process.env.DB_URL ||
+  process.env.DATABASE_URL ||
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/fly`,
   {
     logging: false,

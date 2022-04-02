@@ -8,7 +8,7 @@ const loggerConsola = logs.getLogger('consola')
 const loggerError = logs.getLogger('error')
 
 const PORT = process.env.PORT || 3001
-const HOST = '0.0.0.0'
+const HOST = 'localhost' || '0.0.0.0'
 
 conn.sync({ force: true }).then(() => {
   server.listen(PORT, HOST, () => {

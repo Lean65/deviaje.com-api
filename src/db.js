@@ -3,9 +3,16 @@ const { Sequelize } = require('sequelize')
 const fs = require('fs')
 const path = require('path')
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env
-
+//'postgres://user:pass@example.com:5432/dbname'
 //Reemplazar el db al final por el nombre de la base de datos
 const sequelize = new Sequelize(
+  //postgres://user:pass@example.com:5432/dbname
+  //tipo y user postgres://nmsjqlanayhjza:
+  //password    38f8e70b764138a2844437a450675d8054f0dfc7ff583e528e07586364c3f237    @
+  //host        ec2-52-18-116-67.eu-west-1.compute.amazonaws.com                    :
+  //port        5432                                                                /
+  //database    de2lirvfeel98j
+  process.env.DB_URL ||
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/fly`,
   {
     logging: false,

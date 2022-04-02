@@ -1,3 +1,5 @@
+const { handleHttpError } = require('../utils/handleError')
+
 const {
   UsuarioBeta,
   UsuarioAdmin,
@@ -6,20 +8,32 @@ const {
 } = require('../db')
 const { Op } = require('sequelize')
 
+//  {nickname, name, picture, email, email_verified, sub, updated_at}
+
 module.exports = {
   postUser: async function (req, res, next) {
     try {
-      let { mail, password, userName, favs } = req.body
-      const data = await UsuarioBeta.create({
-        mail,
-        password,
-        userName,
-        favs
-      })
-      console.log(data)
-      res.status(200).json(data)
+      const { name, email, email_verified, sub } = req.body
+
+      const user = {
+        mail: email,
+        password: sub,
+        userName: name,
+        favs: email_verified
+      }
+
+      // const data = await UsuarioBeta.create({
+      //   mail: email,
+      //   password: sub,
+      //   userName: name,
+      //   favs: email_verified
+      // })
+      console.log(user)
+      console.log('ruta postUser anda bien')
+      res.status(200).send({ message: 'todo ok' })
     } catch (err) {
-      res.status(404).json('user do not created', err)
+      console.log(err)
+      handleHttpError(res, 'ERROR_USER_DO_NOT_CREATED')
     }
   },
   postUserAdmin: async function (req, res, next) {

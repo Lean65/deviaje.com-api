@@ -14,7 +14,6 @@ module.exports = {
   postUser: async function (req, res, next) {
     try {
       const { name, email, email_verified, sub } = req.body
-
       const user = {
         mail: email,
         password: sub,
@@ -22,12 +21,18 @@ module.exports = {
         favs: email_verified
       }
 
-      // const data = await UsuarioBeta.create({
-      //   mail: email,
-      //   password: sub,
-      //   userName: name,
-      //   favs: email_verified
+      // await UsuarioBeta.findOrCreate({
+      //   where: {
+      //     mail: email
+      //   },
+      //   defaults: {
+      //     mail: email,
+      //     password: sub,
+      //     userName: name,
+      //     favs: email_verified
+      //   }
       // })
+      //let data = await UsuarioBeta.findAll()
       console.log(user)
       console.log('ruta postUser anda bien')
       res.status(200).send({ message: 'todo ok' })

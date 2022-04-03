@@ -7,9 +7,9 @@ const BASE = 'https://tequila-api.kiwi.com'
 const { handleHttpError } = require('../utils/handleError')
 
 // https://tequila-api.kiwi.com/locations/anything?key=name&value=mar%20del%20plata&locale=en-US&active_only=true
-router.get('/', (req, res) => {
-  res.status(200).send('Todo ok')
-})
+// router.get('/', (req, res) => {
+//   res.status(200).send('Todo ok')
+// })
 
 //Solo la use para crear la funcion FindCode
 router.get('/findcode', (req, res) => {

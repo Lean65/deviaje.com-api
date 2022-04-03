@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = sequelize => {
-    sequelize.define('user-business', {
+    sequelize.define('userBusiness', {
         mail: {
             type: DataTypes.STRING
         },

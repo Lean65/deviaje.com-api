@@ -21,7 +21,11 @@ package-lock.json
 .env
 .env.test
 error.log
+<<<<<<< HEAD
 
+=======
+test.js
+>>>>>>> c7f65fee2f62995e1ef79601444bdae192d9b0d2
 # misc
 .DS_Store
 .env.local

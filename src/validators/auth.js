@@ -2,14 +2,14 @@ const { check } = require('express-validator')
 const validateResults = require('../utils/handleValidator')
 
 const validatorRegister = [
-  check('name')
+  check('userName')
     .exists()
     .notEmpty()
     .isLength({ min: 5, max: 99 }),
-  check('age')
+  check('favs')
     .exists()
     .notEmpty()
-    .isNumeric(),
+    .isString(),
   check('password')
     .exists()
     .notEmpty()

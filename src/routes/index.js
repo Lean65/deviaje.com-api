@@ -2,7 +2,6 @@ const express = require('express')
 const fs = require('fs')
 const router = express.Router()
 
-
 const PATH_ROUTES = __dirname
 
 const removeExtension = filename => {
@@ -16,7 +15,7 @@ fs.readdirSync(PATH_ROUTES).filter(file => {
   const name = removeExtension(file)
 
   if (name != 'index') {
-    router.get(`/${name}`, require(`./${file}`))
+    router.use(`/${name}`, require(`./${name}`))
   }
 })
 

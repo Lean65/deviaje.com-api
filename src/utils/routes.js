@@ -11,8 +11,10 @@ const FindLocationValue = (name, value) => {
     .catch(e=>e)
     // .then(a=>a)
 }
+//DecodeQuery no hace falta porque el query llega como un objeto
 const DecodeQuery = str => Object.fromEntries(str.split('&').map(e=>e.split('=')))
-const ParseData = obj => Object.entries(obj).map(e=>e.join('=')).join('&')
+const AddData = obj => {return {...obj, curr: 'USD'}}
+const ParseData = obj => Object.entries(AddData(obj)).map(e=>e.join('=')).join('&')
 
 module.exports = {
     FindLocationValue,

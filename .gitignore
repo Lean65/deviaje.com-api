@@ -15,6 +15,7 @@
 .env
 .env.test
 error.log
+test.js
 # misc
 .DS_Store
 .env.local

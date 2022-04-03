@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = sequelize => {
-  sequelize.define('userAdmin', {
+  sequelize.define('admin', {
     mail: {
       type: DataTypes.STRING,
       allowNull: false

@@ -8,8 +8,9 @@ const loggerError = logs.getLogger('error')
 
 const PORT = process.env.PORT || 4001
 
-conn.sync({ force: true }).then(() => {
-  server.listen(PORT, () => {
+conn.sync({ force: false }).then(() => {
+  server.listen(PORT, HOST, () => {
+
     loggerConsola.info(`Server is run on port ${PORT}`, server.settings.env)
   })
   server.on('error', error => loggerError.error(`Error en servidor ${error}`))

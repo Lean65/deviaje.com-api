@@ -4,36 +4,40 @@ const {
   UsuarioBeta,
   UsuarioAdmin,
   UsuarioBusiness,
-  UsuarioClient
+  UserClient
 } = require('../db')
 const { Op } = require('sequelize')
-
+//console.log(UserClient)
 //  {nickname, name, picture, email, email_verified, sub, updated_at}
 
 module.exports = {
   postUser: async function (req, res, next) {
     try {
-      const { name, email, email_verified, sub } = req.body
+      const { name, email, nickname, sub } = req.body
+      const users = []
       const user = {
         mail: email,
         password: sub,
         userName: name,
-        favs: email_verified
+        favs: nickname
       }
-
-      // await UsuarioBeta.findOrCreate({
-      //   where: {
-      //     mail: email
-      //   },
-      //   defaults: {
-      //     mail: email,
-      //     password: sub,
-      //     userName: name,
-      //     favs: email_verified
-      //   }
-      // })
-      //let data = await UsuarioBeta.findAll()
-      console.log(user)
+      //console.log(user)
+      users.push(user)
+      users.map(el => {
+        UserClient.findOrCreate({
+          where: {
+            mail: email
+          },
+          defaults: {
+            mail: el.mail,
+            password: el.password,
+            userName: el.userName,
+            favs: el.favs
+          }
+        })
+      })
+      let aux = await UserClient.findAll()
+      console.log(aux)
       console.log('ruta postUser anda bien')
       res.status(200).send({ message: 'todo ok' })
     } catch (err) {
@@ -62,23 +66,6 @@ module.exports = {
         mail,
         password,
         userName
-      })
-      console.log(data)
-      res.status(200).json(data)
-    } catch (err) {
-      res.status(404).json('user do not created', err)
-    }
-  },
-  postUserClient: async function (req, res, next) {
-    try {
-      let { mail, password, userName, birthday, favs, points } = req.body
-      const data = await UsuarioClient.create({
-        mail,
-        password,
-        userName,
-        birthday,
-        favs,
-        points
       })
       console.log(data)
       res.status(200).json(data)

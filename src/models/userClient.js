@@ -6,6 +6,9 @@ module.exports = sequelize => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    verifiedMail: {
+      type: DataTypes.BOOLEAN
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false

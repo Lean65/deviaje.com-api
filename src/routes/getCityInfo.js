@@ -6,7 +6,7 @@ const router = express.Router()
 
 //Se puede usar para buscar localizaciones pasando el nombre de una ciudad como "term", alternativamente un type que se
 //usaria para filtrar resultados
-const func = (req, res)=>{
+module.exports = (req, res)=>{
     const {search, type} = req.query
     axios.get(`${BASE}/locations/query?term=${search}`, {headers: {
         apikey: 'n_-RwJB-98J-s0_OyVx1n9tFSd5SPtoI'
@@ -15,7 +15,3 @@ const func = (req, res)=>{
     .then(resp => res.status(200).send(resp))
     .catch(error => res.status(404).send(error))
 }
-
-router.get('/getcityinfo', func)
-
-module.exports = router

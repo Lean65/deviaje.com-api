@@ -12,9 +12,9 @@ const server = express()
 
 server.name = 'API'
 
-//server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
-//server.use(bodyParser.json({ limit: '50mb' }))
-//server.use(cookieParser())
+server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
+server.use(bodyParser.json({ limit: '50mb' }))
+server.use(cookieParser())
 server.use(morgan('dev'))
 server.use(express.json({ extended: true }))
 server.use(express.urlencoded({ extended: true }))
@@ -29,7 +29,7 @@ server.use((req, res, next) => {
   next()
 })
 
-server.use('/api', require('./routes'))
+server.use('/', require('./routes'))
 
 // Error catching endware.
 server.use((err, req, res, next) => {

@@ -5,7 +5,7 @@ const router = express.Router()
 const axios = require('axios')
 
 
-const func = (req, res)=>{
+module.exports = (req, res)=>{
     const {city} = req.query         //Para cuando se reciba el termino por query
     // const ID = 
     FindLocationValue(city, 'id').then(id => {
@@ -16,7 +16,3 @@ const func = (req, res)=>{
         .catch(error => res.status(404).send(error))
     })
 }
-
-router.get('/topdestination', func)
-
-module.exports = router

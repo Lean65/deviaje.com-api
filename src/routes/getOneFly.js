@@ -5,7 +5,7 @@ const { FindLocationValue, ParseData } = require('../utils/routes')
 const BASE = 'https://tequila-api.kiwi.com'
 
 
-router.get('/getonefly', (req, res)=>{
+module.exports = (req, res)=>{
     //Va a NECESITAR recibir el ID por query
     //NO SEARCH ID
     console.table(req.query)
@@ -24,6 +24,4 @@ router.get('/getonefly', (req, res)=>{
         resultado.length > 0 ? res.status(200).send(resultado) : res.status(400).send('No se encontraron vuelos para la busqueda actual')
     })
     .catch(e => res.send(e))
-})
-
-module.exports = router
+}

@@ -1,5 +1,6 @@
 const express = require('express')
 require('dotenv').config()
+const cors = require('cors')
 // const cookieParser = require('cookie-parser')
 // const bodyParser = require('body-parser')
 const path = require('path')
@@ -11,6 +12,7 @@ const morgan = require('morgan')
 const server = express()
 
 server.name = 'API'
+server.use(cors())
 
 //server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 //server.use(bodyParser.json({ limit: '50mb' }))

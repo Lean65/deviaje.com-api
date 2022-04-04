@@ -1,45 +1,35 @@
 const { handleHttpError } = require('../utils/handleError')
 
-const {
-  Client,
-  Admin,
-  Business
-} = require('../db')
+const { Client, Admin, Business } = require('../db')
 // console.log(Client)
 const { Op } = require('sequelize')
-//console.log(UserClient)
+
 //  {nickname, name, picture, email, email_verified, sub, updated_at}
 
 module.exports = {
   postUser: async function (req, res, next) {
     try {
       const { name, email, nickname, sub } = req.body
-      const users = []
       const user = {
         mail: email,
         password: sub,
         userName: name,
         favs: nickname
       }
-      //console.log(user)
-      users.push(user)
-      users.map(el => {
-        Client.findOrCreate({
-          where: {
-            mail: email
-          },
-          defaults: {
-            mail: el.mail,
-            password: el.password,
-            userName: el.userName,
-            favs: el.favs
-          }
+      let userNew = await Client.findOne({ where: { mail: user.mail } })
+      if (userNew) {
+        console.log(userNew instanceof Client) // true si esta en la base de datos
+        return res.status(200).send({ message: 'User already exists' })
+      } else {
+        await Client.create({
+          mail: email,
+          password: sub,
+          userName: name,
+          favs: nickname
         })
-      })
-      let aux = await Client.findAll()
-      // console.log(aux)
-      console.log('ruta postUser anda bien')
-      res.status(200).send({ message: 'todo ok' })
+        console.log('ruta postUser anda bien')
+        res.status(200).send({ message: 'todo ok' })
+      }
     } catch (err) {
       console.log(err)
       handleHttpError(res, 'ERROR_USER_DO_NOT_CREATED')

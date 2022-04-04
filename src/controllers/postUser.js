@@ -1,11 +1,11 @@
 const { handleHttpError } = require('../utils/handleError')
 
 const {
-  UsuarioBeta,
-  UsuarioAdmin,
-  UsuarioBusiness,
-  UserClient
+  Client,
+  Admin,
+  Business
 } = require('../db')
+// console.log(Client)
 const { Op } = require('sequelize')
 //console.log(UserClient)
 //  {nickname, name, picture, email, email_verified, sub, updated_at}
@@ -24,7 +24,7 @@ module.exports = {
       //console.log(user)
       users.push(user)
       users.map(el => {
-        UserClient.findOrCreate({
+        Client.findOrCreate({
           where: {
             mail: email
           },
@@ -36,8 +36,8 @@ module.exports = {
           }
         })
       })
-      let aux = await UserClient.findAll()
-      console.log(aux)
+      let aux = await Client.findAll()
+      // console.log(aux)
       console.log('ruta postUser anda bien')
       res.status(200).send({ message: 'todo ok' })
     } catch (err) {
@@ -48,7 +48,7 @@ module.exports = {
   postUserAdmin: async function (req, res, next) {
     try {
       let { mail, password, userName } = req.body
-      const data = await UsuarioAdmin.create({
+      const data = await Usuarioadmin.create({
         mail,
         password,
         userName
@@ -62,7 +62,7 @@ module.exports = {
   postUserBusiness: async function (req, res, next) {
     try {
       let { mail, password, userName } = req.body
-      const data = await UsuarioBusiness.create({
+      const data = await Usuariobusiness.create({
         mail,
         password,
         userName

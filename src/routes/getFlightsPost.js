@@ -6,7 +6,7 @@ const BASE = 'https://tequila-api.kiwi.com'
 
 
 //La cree solo para una prueba con el front
-const func = (req, res)=>{
+module.exports = (req, res)=>{
     Promise.all([FindLocationValue(req.query.fly_from, 'code'), FindLocationValue(req.query.fly_to, 'code')])
     .then(resp => {
         req.query.fly_from = resp[0]
@@ -20,7 +20,3 @@ const func = (req, res)=>{
     .then(resp => res.status(200).send(resp.data))
     .catch(e => res.send(e))
 }
-
-router.get('/getflightspost', func)
-
-module.exports = router

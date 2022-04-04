@@ -5,7 +5,6 @@ const { FindLocationValue, ParseData } = require('../utils/routes')
 const BASE = 'https://tequila-api.kiwi.com'
 
 
-
 module.exports = (req, res) => {
     Promise.all([FindLocationValue(req.query.fly_from, 'code'), FindLocationValue(req.query.fly_to, 'code')])
     .then(resp => {

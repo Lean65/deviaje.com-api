@@ -8,11 +8,12 @@ const transporter = createTransport({
   auth: {
     user: `${process.env.NODEMAILER_USER}`,
     pass: `${process.env.NODEMAILER_PASS}`
+  },
+  tls: {
+    rejectUnauthorized: false
   }
 })
 
 transporter.verify().then(() => {
   console.log('Ready for send emails')
 })
-
-module.exports = transporter

@@ -10,17 +10,17 @@ const { postUser } = require('../controllers/postUser')
 
 // router.post('/', postUser)
 
-router.post('/Admin', (req, res) => {
-  try {
-    const { email, password, userName } = req.body
-    const user = { email, password, userName }
-    console.log(user)
-    console.log('ruta postUser anda bien')
-    res.status(200).send({ message: 'todo ok' })
-  } catch (err) {
-    console.log(err)
-    handleHttpError(res, 'ERROR_LOGIN')
-  }
-})
+// router.post('/Admin', (req, res) => {
+//   try {
+//     const { email, password, userName } = req.body
+//     const user = { email, password, userName }
+//     console.log(user)
+//     console.log('ruta postUser anda bien')
+//     res.status(200).send({ message: 'todo ok' })
+//   } catch (err) {
+//     console.log(err)
+//     handleHttpError(res, 'ERROR_LOGIN')
+//   }
+// })
 
 module.exports = router

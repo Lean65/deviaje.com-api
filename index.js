@@ -22,6 +22,7 @@ conn.sync({force:true, alter:true}).then(() => {
   //     }
   //   }
   //   )
+  console.log(Admin)
   server.listen(PORT, () => {
     loggerConsola.info(`Server is run on port ${PORT}`, server.settings.env)
   })

@@ -1,11 +1,14 @@
 const express = require('express')
 require('dotenv').config()
+
+const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+
 const path = require('path')
 const morgan = require('morgan')
-const routes = require('./routes/index.js')
-const cors = require('cors')
+
+//const routes = require('./routes/index.js')
 
 //require('./db.js')
 
@@ -13,7 +16,7 @@ const server = express()
 server.use(cors())
 
 server.name = 'API'
-// server.use(cors())//middleware agregado
+
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 server.use(bodyParser.json({ limit: '50mb' }))
 server.use(cookieParser())

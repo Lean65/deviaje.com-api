@@ -1,4 +1,4 @@
-const server = require('./src/app')
+const server = require('./src/app.js')
 const { conn, Admin } = require('./src/db')
 require('dotenv').config()
 

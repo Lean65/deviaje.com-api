@@ -21,11 +21,11 @@ if(process.env.DATABASE_URL) {
         }
     }
 }
-console.log(url)
-console.log(config)
+// console.log(url)
+// console.log(config)
 const sequelize = new Sequelize(url, config)
 
-console.log('conectado')
+// console.log('conectado')
 
 
 const basename = path.basename(__filename)
@@ -40,7 +40,7 @@ fs.readdirSync(path.join(__dirname, '/models'))
   .forEach(file => {
     modelDefiners.push(require(path.join(__dirname, '/models', file)))
   })
-
+console.log(modelDefiners)
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize))
 // Capitalizamos los nombres de los modelos ie: product => Product

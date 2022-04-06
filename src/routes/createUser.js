@@ -1,4 +1,4 @@
-
+const { User } = require('../db')
 
 module.exports = (req, res)=>{
     const { mail, password, userName } = req.body

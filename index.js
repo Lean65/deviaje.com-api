@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 4001
 //conn.sync({ force: true }).then(() => {
 //server.listen(PORT, HOST, () => {
 
-conn.sync({force:true}).then(() => {
+conn.sync({force:true, alter:true}).then(() => {
   // Admin.findOrCreate(
   //   {
   //     where: {mail : 'leandromelerio@gmail.com'},

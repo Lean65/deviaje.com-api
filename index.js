@@ -12,16 +12,16 @@ const PORT = process.env.PORT || 4001
 //server.listen(PORT, HOST, () => {
 
 conn.sync({force:true}).then(() => {
-  Admin.findOrCreate(
-    {
-      where: {mail : 'leandromelerio@gmail.com'},
-      defaults: {
-        mail: 'leandromelerio@gmail.com',
-        password: '1234',
-        userName: 'lean65'
-      }
-    }
-    )
+  // Admin.findOrCreate(
+  //   {
+  //     where: {mail : 'leandromelerio@gmail.com'},
+  //     defaults: {
+  //       mail: 'leandromelerio@gmail.com',
+  //       password: '1234',
+  //       userName: 'lean65'
+  //     }
+  //   }
+  //   )
   server.listen(PORT, () => {
     loggerConsola.info(`Server is run on port ${PORT}`, server.settings.env)
   })

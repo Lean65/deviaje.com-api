@@ -1,5 +1,3 @@
-const express = require('express')
-const router = express.Router()
 const axios = require('axios')
 const { FindLocationValue, ParseData } = require('../utils/routes')
 const BASE = 'https://tequila-api.kiwi.com'

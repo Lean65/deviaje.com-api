@@ -33,13 +33,13 @@
     "log4js": "^6.4.4",
     "morgan": "^1.10.0",
     "node-fetch": "^3.2.3",
-<<<<<<< HEAD
-=======
     "nodemailer": "^6.7.3",
->>>>>>> 9e2d9b7ab5b188d8b04f81b1191c8ba184ff78df
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
     "sequelize": "^6.17.0",
+    "pg": "^8.7.3",
+    "sequelize": "^6.17.0",
+    "stripe": "^8.215.0",
     "supertest": "^6.2.2",
     "supertest-as-promised": "^4.0.2"
   },

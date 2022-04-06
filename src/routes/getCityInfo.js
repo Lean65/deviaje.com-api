@@ -1,7 +1,5 @@
 const BASE = 'https://tequila-api.kiwi.com'
 const axios = require('axios')
-const express = require('express')
-const router = express.Router()
 
 //getcityinfo
 //Se puede usar para buscar localizaciones pasando el nombre de una ciudad como "term", alternativamente un type que se

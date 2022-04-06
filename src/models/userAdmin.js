@@ -7,7 +7,7 @@ module.exports = sequelize => User.init({
     type: DataTypes.INTEGER ,
     allowNull: false,
     primaryKey: true,
-    // unique: true,
+    unique: true,
   },
   mail: {
     type: DataTypes.STRING,

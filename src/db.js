@@ -21,7 +21,7 @@ if(process.env.DATABASE_URL) {
         }
     }
 }
-console.log(config)
+// console.log(config)
 const sequelize = new Sequelize(url, config)
 
 

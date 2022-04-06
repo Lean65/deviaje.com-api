@@ -6,7 +6,7 @@ module.exports = (req, res)=>{
     .then(data => {
         if(data.length < 1){
             Client.create({
-                mail, password, username
+                mail, password, userName
             })
             return res.send('usuario creado con exito')
         }

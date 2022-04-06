@@ -18,5 +18,5 @@ module.exports = sequelize => User.init({
 }, {
     sequelize,
     timestamps: false,
-    modelName: 'user'
+    modelName: 'admin'
 })

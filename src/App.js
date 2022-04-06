@@ -44,6 +44,5 @@ server.use((err, req, res, next) => {
   console.error(err)
   res.status(status).send(message)
 })
-console.log('server=')
-console.log(server)
+
 module.exports = server

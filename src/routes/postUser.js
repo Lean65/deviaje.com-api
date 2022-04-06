@@ -8,7 +8,7 @@ const { postUser } = require('../controllers/postUser')
 
 // https://tequila-api.kiwi.com/locations/anything?key=name&value=mar%20del%20plata&locale=en-US&active_only=true
 
-router.post('/', postUser)
+// router.post('/', postUser)
 
 router.post('/Admin', (req, res) => {
   try {

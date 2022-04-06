@@ -66,8 +66,8 @@ Admin.findOrCreate(
   )
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-console.log(Admin.findAll())
-console.log('estoy aca')
+// console.log(Admin.findAll())
+// console.log('estoy aca')
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

@@ -3,6 +3,12 @@ const { DataTypes, Model } = require('sequelize')
 class User extends Model {}
 
 module.exports = sequelize => User.init({
+  id:  {
+    type: DataTypes.INTEGER ,
+    allowNull: false,
+    primaryKey: true,
+    // unique: true,
+  },
   mail: {
     type: DataTypes.STRING,
     allowNull: false

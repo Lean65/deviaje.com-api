@@ -25,7 +25,7 @@ console.log(url)
 console.log(config)
 const sequelize = new Sequelize(url, config)
 
-
+console.log('conectado')
 
 
 const basename = path.basename(__filename)

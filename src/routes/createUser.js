@@ -1,11 +1,11 @@
-const { User } = require('../db')
+const { Client } = require('../db')
 
 module.exports = (req, res)=>{
     const { mail, password, userName } = req.body
-    User.findAll({where: {mail: mail}})
+    Client.findAll({where: {mail: mail}})
     .then(data => {
         if(data.length < 1){
-            User.create({
+            Client.create({
                 mail, password, username
             })
             return res.send('usuario creado con exito')

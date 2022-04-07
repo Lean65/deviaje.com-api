@@ -9,7 +9,13 @@ module.exports = (req, res)=>{
     axios.get(`${BASE}/locations/query?term=${search}`, {headers: {
         apikey: 'n_-RwJB-98J-s0_OyVx1n9tFSd5SPtoI'
     }})
-    .then(resp => resp.data.locations)
-    .then(resp => res.status(200).send(resp))
+    .then(resp => {
+        if(resp.data.locations.length === 0){
+            console.log('en el error')
+            return res.status(450)
+        }
+        return resp.data.locations
+    })
+    .then(resp => res.status(200).send(resp.find(e=>(e.type === 'city' && e.name.toLowerCase().includes(search.toLowerCase())))))
     .catch(error => res.status(404).send(error))
 }

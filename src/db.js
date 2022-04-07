@@ -6,7 +6,7 @@ const { PassThrough } = require('stream')
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env
 
 
-let url = process.env.DATABASE_URL || `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/deploy`
+let url = process.env.DATABASE_URL || `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/fly`
 let config = {
     logging: false, // set to console.log to see the raw SQL queries
     native: false, 
@@ -15,18 +15,14 @@ if(process.env.DATABASE_URL) {
     config = {...config,
         dialectOptions: {
             ssl: {
-                // require: true,
+                require: true,
                 rejectUnauthorized: false
             }
         }
     }
 }
-// console.log(url)
-// console.log(config)
+
 const sequelize = new Sequelize(url, config)
-
-// console.log('conectado')
-
 
 const basename = path.basename(__filename)
 const modelDefiners = []
@@ -42,7 +38,6 @@ fs.readdirSync(path.join(__dirname, '/models'))
   })
   // Injectamos la conexion (sequelize) a todos los modelos
   modelDefiners.forEach(model => model(sequelize))
-  console.log(modelDefiners)
 // Capitalizamos los nombres de los modelos ie: product => Product
 let entries = Object.entries(sequelize.models)
 let capsEntries = entries.map(entry => [
@@ -58,8 +53,7 @@ sequelize.models = Object.fromEntries(capsEntries)
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-// console.log(Admin.findAll())
-// console.log('estoy aca')
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

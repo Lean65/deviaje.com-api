@@ -1,7 +1,7 @@
-const { Client } = require('../db')
+const { Router } = require('express')
+const router = Router()
+const { getUsers } = require('../controllers/getUsers')
 
-module.exports = (req, res)=>{
-    const { mail, password, userName } = req.body
-    Client.findAll()
-    .then(data => data.length < 1 ? res.send('No hay usuarios. Se el primero!') : res.send(data))
-}
+router.get('/', getUsers)
+
+module.exports = router

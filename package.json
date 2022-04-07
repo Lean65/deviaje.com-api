@@ -4,7 +4,8 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -L"
+    "start": "nodemon -L",
+    "test": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -37,7 +38,7 @@
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
     "sequelize": "^6.17.0",
-    "supertest": "^6.2.2",
+    "stripe": "^8.215.0",
     "supertest-as-promised": "^4.0.2"
   },
   "devDependencies": {

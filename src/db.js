@@ -5,6 +5,7 @@ const path = require('path')
 const { PassThrough } = require('stream')
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env
 
+
 let url = process.env.DATABASE_URL || `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/fly`
 let config = {
     logging: false, // set to console.log to see the raw SQL queries

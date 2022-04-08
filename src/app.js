@@ -23,7 +23,7 @@ server.use(morgan('dev'))
 server.use(express.json({ extended: true }))
 server.use(express.urlencoded({ extended: true }))
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'travelco.vercel.app')
+  res.header('Access-Control-Allow-Origin', 'http://travelco.vercel.app')
   res.header('Access-Control-Allow-Credentials', 'true')
   res.header(
     'Access-Control-Allow-Headers',

@@ -6,28 +6,33 @@ module.exports = sequelize => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    verifiedMail: {
+    verifiedmail: {
       type: DataTypes.BOOLEAN
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    userName: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false
     },
     birthday: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      defaultValue: 1990
     },
     favs: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      defaultValue: []
     },
     points: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      defaultValue: 0
     }
+  }, {
+    timestamps: false
   })
 }

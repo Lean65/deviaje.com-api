@@ -11,15 +11,29 @@ const loggerError = logs.getLogger('error')
 
 module.exports = {
   postUser: async function (req, res, next) {
+    /*
+    body: {
+    given_name: 'Leandro',
+    nickname: 'leandromelerio',
+    name: 'Leandro',
+    picture: 'https://lh3.googleusercontent.com/a/AATXAJw3922725DUyxaXaRshdGqoSbXfk0ufYk5UyrH9=s96-c',
+    locale: 'es',
+    updated_at: '2022-04-07T19:06:48.831Z',
+    email: 'leandromelerio@gmail.com',
+    email_verified: true,
+    sub: 'google-oauth2|118388952624238691808'
+    }
+    */
+    // console.log(req.body)
+
     try {
-      const { name, email, nickname, sub } = req.body
-      const user = {
-        mail: email,
-        password: sub,
-        userName: name,
-        favs: nickname
-      }
-      let userNew = await Client.findOne({ where: { mail: user.mail } })
+      const { name, email, sub, nickname, email_verified } = req.body
+      // const user = {
+      //   mail: email,
+      //   password: sub,
+      //   userName: name,
+      // }
+      let userNew = await Client.findOne({ where: { mail: email } })
       if (userNew) {
         console.log(userNew instanceof Client) // true si esta en la base de datos
         loggerConsola.info(`User ${user.mail} already exists`)
@@ -39,7 +53,15 @@ module.exports = {
             'Bienvenido a deViaje.com <br>' +
             JSON.stringify(
               `Gracias por registrarte ${user.userName} a nuestra aplicación hecha para el proyecto final SoyHenry`
-            )
+            ),
+          attachments: [
+            {
+              //filename: 'license.txt',
+              //path: '/public/logoDesign.jpg'
+              path:
+                'https://st2.depositphotos.com/4492993/7247/v/950/depositphotos_72470597-stock-illustration-vector-airplane-travel-tourism.jpg'
+            }
+          ]
         }
         const info = await nodemailer.sendMail(mailOptions) //sendMail(mailOptions)
 

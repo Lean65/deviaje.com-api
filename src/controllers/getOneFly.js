@@ -2,14 +2,15 @@ const axios = require('axios')
 const { FindLocationValue, ParseData } = require('../utils/routes')
 const BASE = 'https://tequila-api.kiwi.com'
 const logs = require('../logs')
-//const loggerConsola = logs.getLogger('consola')
+const loggerConsola = logs.getLogger('consola')
 const loggerError = logs.getLogger('error')
+const { handleHttpError } = require('../utils/handleError')
 
 //Va a NECESITAR recibir el ID por query
 //NO SEARCH ID
 
 module.exports = {
-  getOneFly: async function (req, res, next) {
+  getOneFly: function (req, res) {
     try {
       //console.table(req.query)
       Promise.all([
@@ -34,11 +35,15 @@ module.exports = {
             ? res.status(200).send(resultado)
             : res
                 .status(400)
-                .send('No se encontraron vuelos para la busqueda actual')
+                .send(
+                  loggerConsola.info(
+                    'No se encontraron vuelos para la busqueda actual'
+                  )
+                )
         })
         .catch(e => res.send(e))
-    } catch (err) {
-      loggerError.error(err)
+    } catch (error) {
+      loggerError.error(`Error en getOneFly ${error}`)
       handleHttpError(res, 'ERROR_GET_FLIGHTS')
     }
   }

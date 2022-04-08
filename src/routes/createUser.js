@@ -1,8 +1,8 @@
 const { Router } = require('express')
 const router = Router()
 
-const { getOneFly } = require('../controllers/getOneFly')
+const { createUser } = require('../controllers/createUser')
 
-router.get('/', getOneFly)
+router.post('/', createUser)
 
 module.exports = router

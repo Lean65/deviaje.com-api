@@ -1,8 +1,7 @@
 const { Router } = require('express')
 const router = Router()
+const { getUsers } = require('../controllers/getUsers')
 
-const { getOneFly } = require('../controllers/getOneFly')
-
-router.get('/', getOneFly)
+router.get('/', getUsers)
 
 module.exports = router

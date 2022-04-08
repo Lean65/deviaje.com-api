@@ -1,14 +1,18 @@
 const express = require('express')
 require('dotenv').config()
+
+const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+
 const path = require('path')
 const morgan = require('morgan')
-const routes = require('./routes/index.js')
 
+//const routes = require('./routes/index.js')
 //require('./db.js')
 
 const server = express()
+server.use(cors())
 
 server.name = 'API'
 

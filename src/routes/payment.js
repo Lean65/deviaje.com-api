@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { getFlights } = require('../controllers/getFlights')
+const { payment } = require('../controllers/payment')
 
-router.get('/', getFlights)
+router.post('/', payment)
 
 module.exports = router

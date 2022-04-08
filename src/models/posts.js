@@ -1,15 +1,12 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = sequelize => {
-  sequelize.define('business', {
-    mail: {
+  sequelize.define('posts', {
+    content: {
       type: DataTypes.STRING
     },
-    password: {
-      type: DataTypes.STRING
-    },
-    username: {
-      type: DataTypes.STRING
+    score: {
+        type: DataTypes.INTEGER
     }
   }, {
     timestamps: false

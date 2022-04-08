@@ -12,9 +12,13 @@ const PORT = process.env.PORT || 4001
 //conn.sync({ force: true }).then(() => {
 //server.listen(PORT, HOST, () => {
 
-conn.sync({ force: false }).then(() => {
-  server.listen(PORT, ()=>{
-    console.log('aqui')
+conn.sync().then(() => {
+  server.listen(PORT, () => {
+    loggerConsola.info(`Server is run on port ${PORT}`, server.settings.env)
+  })
+  server.on('error', error => loggerError.error(`Error en servidor ${error}`))
+  server.on('uncaughtException', function (err) {
+    console.log(err)
   })
 
 

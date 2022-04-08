@@ -1,7 +1,7 @@
-const BASE = 'https://tequila-api.kiwi.com'
-const axios = require('axios')
+const { Router } = require('express')
+const router = Router()
+const { getCityInfo } = require('../controllers/getCityInfo')
 
-//getcityinfo
 //Se puede usar para buscar localizaciones pasando el nombre de una ciudad como "term", alternativamente un type que se
 //usaria para filtrar resultados
 module.exports = (req, res)=>{

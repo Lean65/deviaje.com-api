@@ -1,6 +1,5 @@
 const { Router } = require('express')
 require('dotenv').config()
-// const { API_KEY } = process.env;
 const router = Router()
 const BASE = 'https://tequila-api.kiwi.com'
 const { handleHttpError } = require('../utils/handleError')

@@ -1,4 +1,6 @@
-const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
+const express = require('express')
+const router = express.Router()
+const { payment } = require('../controllers/payment')
 
 module.exports = async (req, res) => {
     try {

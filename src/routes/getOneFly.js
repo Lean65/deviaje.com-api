@@ -1,7 +1,8 @@
-const axios = require('axios')
-const { FindLocationValue, ParseData } = require('../utils/routes')
-const BASE = 'https://tequila-api.kiwi.com'
+const express = require('express')
+const router = express.Router()
+const { getOneFly } = require('../controllers/getOneFly')
 
+router.get('/', getOneFly)
 
 module.exports = (req, res)=>{
     Promise.all([FindLocationValue(req.query.fly_from, 'code'), FindLocationValue(req.query.fly_to, 'code')])

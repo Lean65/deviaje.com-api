@@ -53,7 +53,15 @@ module.exports = {
             'Bienvenido a deViaje.com <br>' +
             JSON.stringify(
               `Gracias por registrarte ${user.userName} a nuestra aplicación hecha para el proyecto final SoyHenry`
-            )
+            ),
+          attachments: [
+            {
+              //filename: 'license.txt',
+              //path: '/public/logoDesign.jpg'
+              path:
+                'https://st2.depositphotos.com/4492993/7247/v/950/depositphotos_72470597-stock-illustration-vector-airplane-travel-tourism.jpg'
+            }
+          ]
         }
         const info = await nodemailer.sendMail(mailOptions) //sendMail(mailOptions)
 

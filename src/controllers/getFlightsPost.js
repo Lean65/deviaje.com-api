@@ -2,11 +2,13 @@ const axios = require('axios')
 const { FindLocationValue, ParseData } = require('../utils/routes')
 const BASE = 'https://tequila-api.kiwi.com'
 const logs = require('../logs')
-//const loggerConsola = logs.getLogger('consola')
+const loggerConsola = logs.getLogger('consola')
 const loggerError = logs.getLogger('error')
+const { handleHttpError } = require('../utils/handleError')
 
+//La cree solo para una prueba con el front
 module.exports = {
-  getFlightsPost: async function (req, res, next) {
+  getFlightsPost: function (req, res) {
     try {
       Promise.all([
         FindLocationValue(req.query.fly_from, 'code'),
@@ -24,10 +26,10 @@ module.exports = {
             }
           })
         )
-        .then(resp => res.status(200).send(resp.data))
+        .then(resp => res.status(200).send(loggerConsola.info(resp.data)))
         .catch(e => res.send(e))
-    } catch (err) {
-      loggerError.error(err)
+    } catch (error) {
+      loggerError.error(`Error en getFlightsPost ${error}`)
       handleHttpError(res, 'ERROR_GET_FLIGHTS')
     }
   }

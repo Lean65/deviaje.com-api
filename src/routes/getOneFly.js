@@ -4,9 +4,6 @@ const BASE = 'https://tequila-api.kiwi.com'
 
 
 module.exports = (req, res)=>{
-    //Va a NECESITAR recibir el ID por query
-    //NO SEARCH ID
-    console.table(req.query)
     Promise.all([FindLocationValue(req.query.fly_from, 'code'), FindLocationValue(req.query.fly_to, 'code')])
     .then(resp => {
         req.query.fly_from = resp[0]

@@ -11,7 +11,6 @@ module.exports = (req, res)=>{
     }})
     .then(resp => {
         if(resp.data.locations.length === 0){
-            console.log('en el error')
             return res.status(450)
         }
         return resp.data.locations

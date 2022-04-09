@@ -7,11 +7,15 @@ const loggerError = logs.getLogger('error')
 const { handleHttpError } = require('../utils/handleError')
 
 //topdestinations
+/*
+Parametros del query
+  city=...      nombre de la ciudad a buscar.
+  q=...         cantidad a traer
+*/
 module.exports = {
   topDestination: function (req, res) {
     try {
-      const { city } = req.query //Para cuando se reciba el termino por query
-      // const ID =
+      const { city, q } = req.query
       FindLocationValue(city, 'id').then(id => {
         axios
           .get(`${BASE}/locations/topdestinations?term=${id}`, {
@@ -25,7 +29,7 @@ module.exports = {
                 if (a.rank < b.rank) return -1
                 if (a.rank > b.rank) return 1
                 return 0
-              })
+              }).splice(0, q)
             )
           )
           .then(resp => {

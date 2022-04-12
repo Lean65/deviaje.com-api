@@ -1,5 +1,4 @@
 const { DataTypes } = require('sequelize')
-
 module.exports = sequelize => {
   sequelize.define('client', {
     mail: {
@@ -18,20 +17,29 @@ module.exports = sequelize => {
       allowNull: false
     },
     birthday: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: 1990
-    },
-    favs: {
       type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: []
+      allowNull: true
     },
     points: {
       type: DataTypes.INTEGER,
       allowNull: true,
       defaultValue: 0
-    }
+    },
+    dni: {
+      type: DataTypes.STRING
+    },
+    phonenumber: {
+      type: DataTypes.STRING
+    },
+    country: {
+      type: DataTypes.STRING
+    },
+    state: {
+      type: DataTypes.STRING
+    },
+    city: {
+      type: DataTypes.STRING
+    },
   }, {
     timestamps: false
   })

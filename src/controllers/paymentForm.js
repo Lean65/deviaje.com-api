@@ -18,12 +18,10 @@ module.exports = {
         const mailOptions = {
           from: 'servidor node.js',
           to: user.email,
-          subject: 'Compra Exitosa',
+          subject: 'Successful Purchase',
           html:
-            'Bienvenido a deViaje.com <br>' +
-            JSON.stringify(
-              `Gracias por  comprar señor/a ${user.name} en  deViaje.com`
-            ),
+            'Welcome to  deViaje.com <br>' +
+            JSON.stringify(`Thanks for shopping  ${user.name} at  deViaje.com`),
           attachments: [
             {
               //filename: 'license.txt',

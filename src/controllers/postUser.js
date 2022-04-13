@@ -1,7 +1,7 @@
 const { handleHttpError } = require('../utils/handleError')
 const { Client, Admin, Business } = require('../db')
 // console.log(Client)
-const { Op } = require('sequelize')
+// const { Op } = require('sequelize')
 const nodemailer = require('../nodemailer')
 //  {nickname, name, picture, email, email_verified, sub, updated_at}
 
@@ -27,12 +27,7 @@ module.exports = {
     // console.log(req.body)
 
     try {
-      const { name, email, sub, nickname, email_verified } = req.body
-      // const user = {
-      //   mail: email,
-      //   password: sub,
-      //   userName: name,
-      // }
+      const { email, sub, given_name, email_verified } = req.body
       let userNew = await Client.findOne({ where: { mail: email } })
       if (userNew) {
         console.log(userNew instanceof Client) // true si esta en la base de datos
@@ -42,8 +37,8 @@ module.exports = {
         await Client.create({
           mail: email,
           password: sub,
-          userName: name,
-          favs: nickname
+          username: given_name,
+          verifiedmail: email_verified
         })
         const mailOptions = {
           from: 'servidor node.js',
@@ -52,7 +47,7 @@ module.exports = {
           html:
             'Bienvenido a deViaje.com <br>' +
             JSON.stringify(
-              `Gracias por registrarte ${user.userName} a nuestra aplicación hecha para el proyecto final SoyHenry`
+              `Gracias por registrarte ${user.username} a nuestra aplicación hecha para el proyecto final SoyHenry`
             ),
           attachments: [
             {
@@ -76,11 +71,11 @@ module.exports = {
   },
   postUserAdmin: async function (req, res, next) {
     try {
-      let { mail, password, userName } = req.body
-      const data = await Usuarioadmin.create({
+      let { mail, password, username } = req.body
+      const data = await Admin.create({
         mail,
         password,
-        userName
+        username
       })
       console.log(data)
       res.status(200).json(data)
@@ -90,11 +85,11 @@ module.exports = {
   },
   postUserBusiness: async function (req, res, next) {
     try {
-      let { mail, password, userName } = req.body
-      const data = await Usuariobusiness.create({
+      let { mail, password, username } = req.body
+      const data = await Business.create({
         mail,
         password,
-        userName
+        username
       })
       console.log(data)
       res.status(200).json(data)

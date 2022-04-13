@@ -7,7 +7,7 @@ const { handleHttpError } = require('../utils/handleError')
 
 module.exports = {
   createUser: function (req, res) {
-    console.log(req.body)
+    // console.log(req.body)
     try {
       const { email, sub, given_name, email_verified } = req.body
       Client.findOne({ where: { mail: email } })

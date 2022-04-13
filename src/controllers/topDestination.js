@@ -15,7 +15,7 @@ Parametros del query
 module.exports = {
   topDestination: function (req, res) {
     try {
-      const { city, q } = req.query
+      const { city, q = 10 } = req.query
       FindLocationValue(city, 'id').then(id => {
         axios
           .get(`${BASE}/locations/topdestinations?term=${id}`, {

@@ -7,6 +7,7 @@ const { handleHttpError } = require('../utils/handleError')
 
 module.exports = {
   createUser: function (req, res) {
+    console.log(req.body)
     try {
       const { email, sub, given_name, email_verified } = req.body
       Client.findOne({ where: { mail: email } })
@@ -54,3 +55,16 @@ module.exports = {
     }
   }
 }
+/*
+{
+  given_name: 'Leandro',
+  nickname: 'leandromelerio',
+  name: 'Leandro',
+  picture: 'https://lh3.googleusercontent.com/a/AATXAJw3922725DUyxaXaRshdGqoSbXfk0ufYk5UyrH9=s96-c',
+  locale: 'es',
+  updated_at: '2022-04-12T15:58:21.176Z',
+  email: 'leandromelerio@gmail.com',
+  email_verified: true,
+  sub: 'google-oauth2|118388952624238691808'
+}
+*/

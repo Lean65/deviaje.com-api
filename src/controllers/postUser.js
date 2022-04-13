@@ -11,27 +11,12 @@ const loggerError = logs.getLogger('error')
 
 module.exports = {
   postUser: async function (req, res, next) {
-    /*
-    body: {
-    given_name: 'Leandro',
-    nickname: 'leandromelerio',
-    name: 'Leandro',
-    picture: 'https://lh3.googleusercontent.com/a/AATXAJw3922725DUyxaXaRshdGqoSbXfk0ufYk5UyrH9=s96-c',
-    locale: 'es',
-    updated_at: '2022-04-07T19:06:48.831Z',
-    email: 'leandromelerio@gmail.com',
-    email_verified: true,
-    sub: 'google-oauth2|118388952624238691808'
-    }
-    */
-    // console.log(req.body)
-
     try {
       const { email, sub, given_name, email_verified } = req.body
       let userNew = await Client.findOne({ where: { mail: email } })
       if (userNew) {
         console.log(userNew instanceof Client) // true si esta en la base de datos
-        loggerConsola.info(`User ${user.mail} already exists`)
+        loggerConsola.info(`User ${userNew.mail} already exists`)
         return res.status(200).send({ message: 'User already exists' })
       } else {
         await Client.create({
@@ -42,12 +27,12 @@ module.exports = {
         })
         const mailOptions = {
           from: 'servidor node.js',
-          to: user.mail,
-          subject: 'Registro Exitoso',
+          to: email,
+          subject: 'Successful registration',
           html:
-            'Bienvenido a deViaje.com <br>' +
+            'Welcome to deViaje.com <br>' +
             JSON.stringify(
-              `Gracias por registrarte ${user.username} a nuestra aplicación hecha para el proyecto final SoyHenry`
+              `Thank you  for registering  ${given_name} at  deViaje.com, have a great day`
             ),
           attachments: [
             {
@@ -60,7 +45,7 @@ module.exports = {
         }
         const info = await nodemailer.sendMail(mailOptions) //sendMail(mailOptions)
 
-        loggerConsola.info(`User ${user.mail} created`)
+        loggerConsola.info(`User ${email} created`)
         res.status(200).send({ message: 'todo ok' })
       }
     } catch (err) {
@@ -97,4 +82,32 @@ module.exports = {
       res.status(404).json('user do not created', err)
     }
   }
+  // postUserAdmin: async function (req, res, next) {
+  //   try {
+  //     let { mail, password, userName } = req.body
+  //     const data = await Usuarioadmin.create({
+  //       mail,
+  //       password,
+  //       userName
+  //     })
+  //     console.log(data)
+  //     res.status(200).json(data)
+  //   } catch (err) {
+  //     res.status(404).json('user do not created', err)
+  //   }
+  // },
+  // postUserBusiness: async function (req, res, next) {
+  //   try {
+  //     let { mail, password, userName } = req.body
+  //     const data = await Usuariobusiness.create({
+  //       mail,
+  //       password,
+  //       userName
+  //     })
+  //     console.log(data)
+  //     res.status(200).json(data)
+  //   } catch (err) {
+  //     res.status(404).json('user do not created', err)
+  //   }
+  // }
 }

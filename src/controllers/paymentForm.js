@@ -10,8 +10,8 @@ module.exports = {
   paymentForm: async function (req, res, next) {
     console.log('paymentform')
     try {
-      const { name, email, address } = req.body
-      const user = { name, email, address }
+      const user = req.body
+      //console.log(user)
       let userNew = await Client.findOne({ where: { mail: user.email } })
       if (userNew) {
         console.log(userNew instanceof Client) // true si esta en la base de datos
@@ -32,12 +32,13 @@ module.exports = {
             }
           ]
         }
-        const info = await nodemailer.sendMail(mailOptions) //sendMail(mailOptions)
 
+        const info = await nodemailer.sendMail(mailOptions) //sendMail(mailOptions)
+        console.log(user)
         return res.status(200).send({ message: 'todo ok' })
       } else {
         loggerConsola.info(`User ${user.email} not exists`)
-        res.status(200).send({ message: 'usuario no registrado' })
+        return res.status(200).send({ message: 'usuario no registrado' })
       }
     } catch (err) {
       loggerError.error(err)

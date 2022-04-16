@@ -82,32 +82,4 @@ module.exports = {
       res.status(404).json('user was not created', err)
     }
   }
-  // postUserAdmin: async function (req, res, next) {
-  //   try {
-  //     let { mail, password, userName } = req.body
-  //     const data = await Usuarioadmin.create({
-  //       mail,
-  //       password,
-  //       userName
-  //     })
-  //     console.log(data)
-  //     res.status(200).json(data)
-  //   } catch (err) {
-  //     res.status(404).json('user do not created', err)
-  //   }
-  // },
-  // postUserBusiness: async function (req, res, next) {
-  //   try {
-  //     let { mail, password, userName } = req.body
-  //     const data = await Usuariobusiness.create({
-  //       mail,
-  //       password,
-  //       userName
-  //     })
-  //     console.log(data)
-  //     res.status(200).json(data)
-  //   } catch (err) {
-  //     res.status(404).json('user do not created', err)
-  //   }
-  // }
 }

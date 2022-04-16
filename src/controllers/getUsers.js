@@ -8,11 +8,10 @@ module.exports = {
   getUsers: function (req, res) {
     try {
       const { mail, password, userName } = req.body
-      Client.findAll().then(data =>
-        data.length < 1
-          ? res.send('No hay usuarios. Se el primero!')
-          : res.send(data)
-      )
+      Client.findAll().then(data => {
+        if(data.length < 1) return res.send('no hay usuarios en la base de datos')
+        else return (res.send(data))
+      })
       loggerConsola.info(`Usuarios: ${data}`)
     } catch (error) {
       loggerError.error(`Error en getUsers ${error}`)

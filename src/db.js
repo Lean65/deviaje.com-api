@@ -51,8 +51,10 @@ sequelize.models = Object.fromEntries(capsEntries)
 // const { Client, Admin, Business } = sequelize.models
 // console.log(sequelize.models)
 
-const {Client, Posts} = sequelize.models
+const {Client, Posts, Compras, Pagos} = sequelize.models
 Posts.belongsTo(Client)
+// Pagos.belongsTo(Compras)
+Client.hasMany(Compras)
 // Client.hasMany(Posts)
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);

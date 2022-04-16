@@ -8,6 +8,7 @@ const nodemailer = require('../nodemailer')
 
 module.exports = {
   paymentForm: async function (req, res, next) {
+    console.log('paymentform')
     try {
       const { name, email, address } = req.body
       const user = { name, email, address }

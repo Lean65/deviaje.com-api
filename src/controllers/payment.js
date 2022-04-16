@@ -8,7 +8,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST)
 module.exports = {
   payment: async (req, res) => {
     try {
-      const { amount } = req.body
+      const { amount } = req.body //user(mail)
+      console.log('payment')
       const paymentIntent = await stripe.paymentIntents.create({
         amount,
         currency: 'usd'

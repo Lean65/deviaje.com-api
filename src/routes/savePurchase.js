@@ -4,6 +4,9 @@ const { Compras, Client } = require('../db.js')
 
 router.get('/', (req, res)=>{
     //req.body = citycodefrom, citycodeto, local_departure, user/mail
+
+
+    
     const email = 'leandromelerio@gmail.com'
     Client.findOne({where: {mail: email}})
     .then(r => 

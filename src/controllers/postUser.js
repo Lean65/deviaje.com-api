@@ -79,7 +79,7 @@ module.exports = {
       console.log(data)
       res.status(200).json(data)
     } catch (err) {
-      res.status(404).json('user do not created', err)
+      res.status(404).json('user was not created', err)
     }
   }
 }

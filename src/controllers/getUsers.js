@@ -17,7 +17,7 @@ module.exports = {
     } catch (error) {
       loggerError.error(`Error en getUsers ${error}`)
       handleHttpError(res, 'ERROR_GET_USERS')
-      res.status(415).send(error)
+      return res.status(415).send(error)
     }
   }
 }

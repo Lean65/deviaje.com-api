@@ -2,7 +2,7 @@ const { Router } = require('express')
 const router = Router()
 const { getUsers } = require('../controllers/getUsers')
 
-router.get('/', (req, res) {
+router.get('/', (req, res) => {
     try {
       const { mail, password, userName } = req.body
       Client.findAll()

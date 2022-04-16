@@ -1,8 +1,5 @@
 const { Router } = require('express')
-require('dotenv').config()
 const router = Router()
-const BASE = 'https://tequila-api.kiwi.com'
-const { handleHttpError } = require('../utils/handleError')
 const { postUser } = require('../controllers/postUser')
 
 // https://tequila-api.kiwi.com/locations/anything?key=name&value=mar%20del%20plata&locale=en-US&active_only=true

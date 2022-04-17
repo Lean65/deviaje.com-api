@@ -1,5 +1,5 @@
 const { handleHttpError } = require('../utils/handleError')
-const { Client } = require('../db')
+const { Client, Passenger } = require('../db')
 const logs = require('../logs')
 const loggerConsola = logs.getLogger('consola')
 const loggerError = logs.getLogger('error')
@@ -12,6 +12,16 @@ module.exports = {
       const { passengersInfo, data } = req.body
       console.log(passengersInfo)
       console.log(data)
+
+      passengersInfo.map(el =>
+        Passenger.create({
+          name: el.name,
+          lastname: el.lastname,
+          document: el.document,
+          birthday: el.birth,
+          country: el.country
+        })
+      )
       let user = {}
 
       user.name = passengersInfo.map(e => e.name).join(';  ')

@@ -1,5 +1,7 @@
-const router = require('express')()
-const { createAdmin } = require('../controllers/createAdmin.js')
+const { Router } = require('express')
+const router = Router()
+
+const { createAdmin } = require('../controllers/createAdmin')
 
 router.get('/', createAdmin)
 

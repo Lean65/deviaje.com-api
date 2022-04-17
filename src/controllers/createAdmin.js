@@ -4,11 +4,11 @@ module.exports = {
     createAdmin: function(req, res){
         Admin.findOrCreate({
             where: {
-                mail: req.body.mail
+                mail: req.query.mail
             },
             defaults: {
-                mail: req.body.mail,
-                password: req.body.password
+                mail: req.query.mail,
+                password: req.query.password
             }
         })
         .then(()=>{

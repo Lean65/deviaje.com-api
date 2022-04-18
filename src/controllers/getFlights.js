@@ -8,6 +8,7 @@ const loggerError = logs.getLogger('error')
 
 module.exports = {
   getFlights: function (req, res) {
+    console.log('BUSCANDO VIAJES')
     try {
       Promise.all([
         FindLocationValue(req.query.fly_from, 'code'),

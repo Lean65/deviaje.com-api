@@ -13,7 +13,7 @@ module.exports = {
         if(data.length < 1) return res.status(200).send('no hay usuarios en la base de datos')
         else return res.send(data)
       })
-      loggerConsola.info(`Usuarios: ${data}`)
+      // loggerConsola.info(`Usuarios: ${data}`)
     } catch (error) {
       loggerError.error(`Error en getUsers ${error}`)
       handleHttpError(res, 'ERROR_GET_USERS')

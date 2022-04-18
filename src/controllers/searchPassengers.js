@@ -14,11 +14,11 @@ module.exports = {
       })
     } 
     Passenger.findAll()
-      .then(r =>
-        res.send(
+      .then(r =>{
+        return res.send(
           r.filter(u => u.name.toLowerCase().includes(name.toLowerCase()))
         )
-      )
+      })
       .catch(() => {
         return handleHttpError(res, 'ERROR_PASSENGER_DO_NOT_FOUND')
         //res.send('Paso algo malo con la info personal...')

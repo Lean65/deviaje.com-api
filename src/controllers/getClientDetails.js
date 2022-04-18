@@ -1,4 +1,5 @@
 const { Client, Payment } = require('../db.js')
+const { handleHttpError } = require('../utils/handleError')
 
 module.exports = {
   // const {mail, email} = req.query
@@ -10,6 +11,7 @@ module.exports = {
       const resultado = await Payment.findAll({})
       res.status(200).send(resultado)
     } catch (err) {
+      handleHttpError(res, 'ERROR_PAYMENT_DO_NOT_CREATED')
       res.status(401).send('algo malio sal...')
     }
   }

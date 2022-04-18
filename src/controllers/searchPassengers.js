@@ -7,7 +7,12 @@ module.exports = {
   getInfo: function (req, res) {
     const name = req.body.name || req.query.name
     //console.log(name)
-    if(!name) return res.send(Passenger.findAll())
+    if(!name){
+      Passenger.findAll()
+      .then(r=>{
+        return res.send(r)
+      })
+    } 
     Passenger.findAll()
       .then(r =>
         res.send(

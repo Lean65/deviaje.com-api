@@ -19,7 +19,6 @@ module.exports = {
       if (userNew) {
         console.log(userNew instanceof Payment) // true si esta en la base de datos
         loggerConsola.info(`User ${email} already exists`)
-        console.log(user)
         return res.status(200).send({ message: 'todo ok' })
       } else {
         await Payment.create({

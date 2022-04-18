@@ -20,8 +20,8 @@ module.exports = {
         )
       )
       .catch(() => {
-        handleHttpError(res, 'ERROR_PASSENGER_DO_NOT_FOUND')
-        res.send('Paso algo malo con la info personal...')
+        return handleHttpError(res, 'ERROR_PASSENGER_DO_NOT_FOUND')
+        //res.send('Paso algo malo con la info personal...')
       })
   }
 }

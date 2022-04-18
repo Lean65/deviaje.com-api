@@ -6,12 +6,13 @@ const { handleHttpError } = require('../utils/handleError')
 module.exports = {
   getInfo: function (req, res) {
     const name = req.body.name || req.query.name
-    console.log(name)
+    //console.log(name)
     Passenger.findAll()
       .then(r =>
-        res.send(
-          r.filter(u => u.name.toLowerCase().includes(name.toLowerCase()))
-        )
+        // res.send(
+        //   r.filter(u => u.name.toLowerCase().includes(name.toLowerCase()))
+        // )
+        res.send(r)
       )
       .catch(() => {
         handleHttpError(res, 'ERROR_PASSENGER_DO_NOT_FOUND')

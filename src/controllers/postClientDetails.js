@@ -27,7 +27,8 @@ module.exports = {
           name: name,
           address: address
         })
-
+        const ver = await Payment.findOne({})
+        console.log(ver)
         loggerConsola.info(`User ${email} not exists`)
         return res.status(200).send({ message: 'usuario no registrado' })
       }

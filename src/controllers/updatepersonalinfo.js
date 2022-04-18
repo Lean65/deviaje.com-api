@@ -9,12 +9,11 @@ console.log(Client)
 module.exports = {
   updatepersonalinfo: function (req, res) {
     //Necesito un parametro por el que hacer la busqueda, ej: mail
-    // let mail = 'algo@gmail.com'
-    const { email, dni, birthday, phone, country, state, city } = req.body
-    // console.log(req.body)
-    // console.log('*************')
+    console.log(req.body)
+    const { email, dni, phone, country, state, city } = req.body
+    const age = req.body.age.slice(0, 10).split('-').reverse().join('/')
     Client.update({
-      dni, birthday, phonenumber: phone, country, state, city
+      dni, birthday: age, phonenumber: phone, country, state, city
     }, {where: {mail: email}})
     .then(()=>res.send('Informacion de ' + email + ' actualizada con exito'))
     .catch(error => {

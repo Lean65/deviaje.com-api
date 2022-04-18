@@ -8,7 +8,8 @@ module.exports = sequelize => {
         allowNull: false
       },
       verifiedmail: {
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
       },
       password: {
         type: DataTypes.STRING,
@@ -19,29 +20,32 @@ module.exports = sequelize => {
         allowNull: false
       },
       birthday: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 1990
+        type: DataTypes.STRING,
+        defaultValue: 'dd/mm/aaaa'
       },
       points: {
         type: DataTypes.INTEGER,
-        allowNull: true,
         defaultValue: 0
       },
       dni: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        defaultValue: '---'
       },
       phonenumber: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        defaultValue: '---'
       },
       country: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        defaultValue: '---'
       },
       state: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        defaultValue: '---'
       },
       city: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        defaultValue: '---'
       }
     },{
     timestamps: false

@@ -7,12 +7,12 @@ module.exports = {
   getInfo: function (req, res) {
     const name = req.body.name || req.query.name
     //console.log(name)
+    if(!name) return res.send(Passenger.findAll())
     Passenger.findAll()
       .then(r =>
-        // res.send(
-        //   r.filter(u => u.name.toLowerCase().includes(name.toLowerCase()))
-        // )
-        res.send(r)
+        res.send(
+          r.filter(u => u.name.toLowerCase().includes(name.toLowerCase()))
+        )
       )
       .catch(() => {
         handleHttpError(res, 'ERROR_PASSENGER_DO_NOT_FOUND')

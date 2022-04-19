@@ -16,7 +16,7 @@ module.exports = {
         .get(`${BASE}/locations/query?term=${search}`, {
           headers: {
             apikey: 'n_-RwJB-98J-s0_OyVx1n9tFSd5SPtoI'
-          }
+          } 
         })
         .then(resp => resp.data.locations)
         .then(data => {

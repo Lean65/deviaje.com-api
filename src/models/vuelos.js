@@ -27,9 +27,10 @@ module.exports = sequelize => {
       duration: {
         type: DataTypes.STRING
       }
-    },
-    {
-      timestamps: false
     }
+    // ,
+    // {
+    //   timestamps: false
+    // }
   )
 }

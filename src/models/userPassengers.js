@@ -16,11 +16,11 @@ module.exports = sequelize => {
         allowNull: false
       },
       birthday: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: false
       },
       document: {
-        type: DataTypes.CHAR
+        type: DataTypes.STRING
       }
     },
     {

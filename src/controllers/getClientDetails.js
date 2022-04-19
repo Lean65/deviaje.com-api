@@ -1,4 +1,4 @@
-const { Client, Payment } = require('../db.js')
+const { Fly, Payment } = require('../db.js')
 const { handleHttpError } = require('../utils/handleError')
 
 module.exports = {
@@ -8,7 +8,9 @@ module.exports = {
   // .catch(e => res.status(401).send('algo malio sal...'))
   getClientDetails: async function (req, res) {
     try {
-      const resultado = await Payment.findAll({})
+      const resultado = await Payment.findAll({
+        include: Fly
+      })
       res.status(200).send(resultado)
     } catch (err) {
       handleHttpError(res, 'ERROR_PAYMENT_DO_NOT_CREATED')

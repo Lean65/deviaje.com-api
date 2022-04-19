@@ -13,15 +13,15 @@ module.exports = {
       // console.log(price)
       const { email, name, address } = billingDetails
 
-      let userNew = await Payment.findOne({
-        where: { mail: email }
-      })
-      if (userNew) {
-        console.log(userNew instanceof Payment) // true si esta en la base de datos
-        loggerConsola.info(`User ${email} already exists`)
-        return res.status(200).send({ message: 'todo ok' })
-      } else {
-        await Payment.create({
+      // let userNew = await Payment.findOne({
+      //   where: { mail: email }
+      // })
+      // if (userNew) {
+      //   console.log(userNew instanceof Payment) // true si esta en la base de datos
+      //   loggerConsola.info(`User ${email} already exists`)
+      //   return res.status(200).send({ message: 'todo ok' })
+      // } else {
+        Payment.create({
           mail: email,
           monto: price,
           name: name,
@@ -31,8 +31,7 @@ module.exports = {
         console.log(ver)
         loggerConsola.info(`User ${email} not exists`)
         return res.status(200).send({ message: 'usuario no registrado' })
-      }
-    } catch (err) {
+      } catch (err) {
       loggerError.error(err)
       handleHttpError(res, 'ERROR_USER_DO_NOT_CREATED')
     }

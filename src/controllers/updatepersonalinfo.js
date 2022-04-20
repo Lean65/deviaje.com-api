@@ -4,8 +4,9 @@ const loggerError = logs.getLogger('error')
 const { handleHttpError } = require('../utils/handleError')
 const { Client } = require('../db')
 
-console.log(Client)
+// console.log(Client)
 
+//Esta ruta sirve para actualizar los detalles especificos de un CLIENTE
 module.exports = {
   updatepersonalinfo: function (req, res) {
     //Necesito un parametro por el que hacer la busqueda, ej: mail

@@ -2,6 +2,13 @@
 const { Client, Passenger, Payment, Fly } = require('../db')
 const nodemailer = require('../nodemailer')
 const photo = 'https://st2.depositphotos.com/4492993/7247/v/950/depositphotos_72470597-stock-illustration-vector-airplane-travel-tourism.jpg'
+const ranks = [
+    [00, 10, '*'], 
+    [10, 40, '**'], 
+    [40, 80, '***'], 
+    [80, 200, '****'], 
+    [200, 501, '*****']
+  ]
 
 module.exports = {
     MailPurchaseConfirmation: (mail, name) => {
@@ -16,16 +23,17 @@ module.exports = {
                     attachments: [ { path: photo } ]
                 }
                 nodemailer.sendMail(mailOptions)
-                return 'mail enviado a la persona que pago'
+                return 'Mail enviado a la persona que pago'
+                return r
             }
-            else return 'mail no enviado a la persona que pago'
+            else return 'Mail no enviado a la persona que pago'
         })
         .catch(e=>e)
     },
 
     PostPassengers: ( passengersInfo, usermail) => {
         // const { passengersInfo, usermail } = req.body
-        return Client.findOne({ where: { mail: usermail } })
+        return Client.findOne({ where: { mail: usermail } })        
         .then(r=>{
             if(r){
                 const mailOptions = {
@@ -46,19 +54,16 @@ module.exports = {
                     attachments: [ { path:photo } ]
                 }
                 nodemailer.sendMail(mailOptions)
-                passengersInfo.forEach(e => {
-                    Passenger.findOrCreate({
-                        where: {document: e.document},
-                        defaults: {
-                            name: e.name,
-                            lastname: e.lastname,
-                            document: e.document,
-                            birthday: e.birth,
-                            country: e.country
-                        }
-                    })
-                })
-                return 'Se agregaron correctamente los pasajeros'
+                return Promise.all(passengersInfo.map(e => Passenger.findOrCreate({
+                            where: {document: e.document},
+                            defaults: {
+                                name: e.name,
+                                lastname: e.lastname,
+                                document: e.document,
+                                birthday: e.birth,
+                                country: e.country
+                            }
+                        })))
             }
             else return 'El usuario parece no estar registrado o algo asi'
         })
@@ -72,12 +77,13 @@ module.exports = {
             name: name,
             address: address
         })
-        .then(()=>'Info de pago registrada')
+        // .then(r=>r)
+        // .then(()=>'Info de pago registrada')
         .catch(()=>'No se registro el pago')
     },
 
     PostVuelos: vuelo => {
-        const { cityCodeFrom, cityCodeTo, local_departure, local_arrival, cityFrom, cityTo, duration } = vuelo[0]
+        const { cityCodeFrom, cityCodeTo, local_departure, local_arrival, cityFrom, cityTo, duration } = vuelo
         // 2022-04-20T21:20:00.000Z
         let timeA = local_arrival.slice(11, 16)
         let timeD = local_departure.slice(11, 16)
@@ -92,11 +98,37 @@ module.exports = {
             timeA,
             duration: duration.total,
         })
-        .then(r=>'Vuelo registrado con exito')
+        // .then(r=>'Vuelo registrado con exito')
         .catch(e=>'No se registro el vuelo porque ...' + e)
     },
 
-    AddPoint: () => {
-        
+    AddPoints: (mail, points) => {
+        return Client.findOne({where: {mail: mail}})
+        .then(p=>{
+            let u = p.dataValues
+            u.points += parseInt(points)
+            let check = u.points > 500 ? 500 : u.points < 0 ? 0 : u.points
+            let prevCategory = u.category
+            u.category = ranks.find(e=>e[0] <= check && e[1] > check)[2]
+            if(prevCategory !== u.category){
+                nodemailer.sendMail({
+                    from: 'servidor node.js',
+                    to: u.mail,
+                    subject: 'Subida de categoria!',
+                    html:
+                    JSON.stringify(
+                        `Felicidades ${u.username} por subir a categoria ${u.category}`),
+                    attachments: [
+                    {path: photo}
+                    ]
+                })
+            }
+            // p.dataValues = u
+            // console.log(u)
+            // console.log(p)
+            Client.update({ points: u.points, category: u.category}, {where: {mail: mail}})
+            return 'Puntos agregados con exito'
+        })
+        .catch(e=>'No se pudieron agregar los puntos porque ' + e)
     }
 }

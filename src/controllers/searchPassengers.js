@@ -6,7 +6,8 @@ const { handleHttpError } = require('../utils/handleError')
 module.exports = {
   getInfo: function (req, res) {
     const name = req.body.name || req.query.name
-    console.log(name)
+    //console.log(name)
+    if(!name) return res.send(Passenger.findAll())
     Passenger.findAll()
       .then(r =>
         res.send(

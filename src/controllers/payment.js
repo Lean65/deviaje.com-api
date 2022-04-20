@@ -18,8 +18,8 @@ module.exports = {
       res.status(200).send(paymentIntent.client_secret)
     } catch (err) {
       loggerError.error(`Error en payment ${err}`)
-      handleHttpError(res, 'ERROR_PAYMENT')
-      res.status(500).json({ statusCode: 500, message: err.message })
+      return handleHttpError(res, 'ERROR_PAYMENT')
+      //res.status(500).json({ statusCode: 500, message: err.message })
     }
   }
 }

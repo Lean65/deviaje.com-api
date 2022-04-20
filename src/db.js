@@ -53,10 +53,23 @@ sequelize.models = Object.fromEntries(capsEntries)
 // const { Client, Admin, Business } = sequelize.models
 // console.log(sequelize.models)
 
-const { Client, Posts, Compras, Pagos, Vuelos } = sequelize.models
-Posts.belongsTo(Client)
+const { Client, Passenger, Fly, Payment} = sequelize.models
+//Ya esta
+Client.belongsToMany(Fly, {through: 'clientfly'})
+Fly.belongsToMany(Client, {through: 'clientfly'})
+
+
+Passenger.belongsToMany(Fly, {through: 'passengerfly'})
+Fly.belongsToMany(Passenger, {through: 'passengerfly'})
+
+// Ya esta
+Fly.hasMany(Payment)
+Payment.belongsTo(Fly)
+
+
+// Posts.belongsTo(Client)
 // Pagos.belongsTo(Compras)
-Client.hasMany(Compras)
+// Client.hasMany(Compras)
 // Client.hasMany(Posts)
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);

@@ -27,6 +27,10 @@ module.exports = sequelize => {
         type: DataTypes.INTEGER,
         defaultValue: 0
       },
+      category: {
+        type: DataTypes.STRING,
+        defaultValue: '*'
+      },
       dni: {
         type: DataTypes.STRING,
         defaultValue: '---'

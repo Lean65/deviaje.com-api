@@ -8,10 +8,10 @@ const nodemailer = require('../nodemailer')
 
 module.exports = {
   passengersInfo: async function (req, res, next) {
-    try {
-      const { passengersInfo, usermail } = req.body
+    try {                     //llega undefined
+      const { passengersInfo, data } = req.body
       console.log(passengersInfo)
-      console.log(usermail)
+      console.log(data)
 
       passengersInfo.map(el =>
         Passenger.create({
@@ -30,13 +30,13 @@ module.exports = {
       user.birth = passengersInfo.map(e => e.birth).join(';  ')
       user.country = passengersInfo.map(e => e.country).join('; ')
 
-      let userNew = await Client.findOne({ where: { mail: usermail } })
+      let userNew = await Client.findOne({ where: { mail: data } })
       if (userNew) {
         console.log(userNew instanceof Client) // true si esta en la base de datos
-        loggerConsola.info(`User ${usermail} already exists`)
+        loggerConsola.info(`User ${data} already exists`)
         const mailOptions = {
           from: 'servidor node.js',
-          to: usermail,
+          to: data,
           subject: 'Tickets Information',
           html:
             'Tickets Information <br><br>' +
@@ -60,7 +60,7 @@ module.exports = {
 
         return res.status(200).send({ message: 'todo ok' })
       } else {
-        loggerConsola.info(`User ${usermail} not  exists`)
+        loggerConsola.info(`User ${data} not  exists`)
         res.status(401).send({ message: 'usuario no registrado' })
       }
       return res.status(200).send({ message: 'todo ok passengerInfo' })

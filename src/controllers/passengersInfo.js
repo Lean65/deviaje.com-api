@@ -61,7 +61,7 @@ module.exports = {
         return res.status(200).send({ message: 'todo ok' })
       } else {
         loggerConsola.info(`User ${data} not  exists`)
-        res.status(401).send({ message: 'usuario no registrado' })
+        return res.status(401).send({ message: 'usuario no registrado' })
       }
       return res.status(200).send({ message: 'todo ok passengerInfo' })
     } catch (err) {

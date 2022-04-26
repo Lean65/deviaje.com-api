@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { getInfo } = require('../controllers/getPersonalInfo')
 
-router.get('/', getInfo)
+router.post('/', getInfo)
 
 module.exports = router

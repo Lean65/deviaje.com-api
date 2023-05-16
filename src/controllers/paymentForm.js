@@ -8,9 +8,10 @@ const nodemailer = require('../nodemailer')
 
 module.exports = {
   paymentForm: async function (req, res, next) {
+    console.log('paymentform')
     try {
-      const { name, email, address } = req.body
-      const user = { name, email, address }
+      const user = req.body
+      //console.log(user)
       let userNew = await Client.findOne({ where: { mail: user.email } })
       if (userNew) {
         console.log(userNew instanceof Client) // true si esta en la base de datos
@@ -18,12 +19,10 @@ module.exports = {
         const mailOptions = {
           from: 'servidor node.js',
           to: user.email,
-          subject: 'Compra Exitosa',
+          subject: 'Successful Purchase',
           html:
-            'Bienvenido a deViaje.com <br>' +
-            JSON.stringify(
-              `Gracias por  comprar señor/a ${user.name} en  deViaje.com`
-            ),
+            'Welcome to  deViaje.com <br>' +
+            JSON.stringify(`Thanks for shopping  ${user.name} at  deViaje.com`),
           attachments: [
             {
               //filename: 'license.txt',
@@ -33,12 +32,13 @@ module.exports = {
             }
           ]
         }
-        const info = await nodemailer.sendMail(mailOptions) //sendMail(mailOptions)
 
+        const info = await nodemailer.sendMail(mailOptions) //sendMail(mailOptions)
+        console.log(user)
         return res.status(200).send({ message: 'todo ok' })
       } else {
         loggerConsola.info(`User ${user.email} not exists`)
-        res.status(200).send({ message: 'usuario no registrado' })
+        return res.status(200).send({ message: 'usuario no registrado' })
       }
     } catch (err) {
       loggerError.error(err)
